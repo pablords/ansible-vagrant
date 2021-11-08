@@ -11,3 +11,7 @@
   vars:
     packges:
       - httpd
+- name: ensure apache is running
+  service:
+    name: httpd
+    state: started
