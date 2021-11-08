@@ -3,11 +3,11 @@ Vagrant.configure("2") do |config|
 
   config.ssh.insert_key = false
 
-  config.vm.define "server", primary: true do |server|
-    server.vm.box = "ubuntu/bionic64"
-    server.vm.network "public_network", ip: "10.0.0.10", hostname: true
-    server.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
-    server.vm.provision :shell, :inline => "cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys", run: "always"
+  config.vm.define "ubuntu", primary: true do |ubuntu|
+    ubuntu.vm.box = "ubuntu/bionic64"
+    ubuntu.vm.network "public_network", ip: "10.0.0.10", hostname: true
+    ubuntu.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
+    ubuntu.vm.provision :shell, :inline => "cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys", run: "always"
   end
 
   config.vm.define "centos" do |centos|

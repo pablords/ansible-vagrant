@@ -15,3 +15,6 @@
   service:
     name: httpd
     state: started
+
+- name: Copiando Template
+  template: src=motd dest=/etc/motd force=yes owner=root group=root
