@@ -1,0 +1,4 @@
+[servers]
+10.0.0.10 ansible_connection=ssh ansible_user=vagrant ansible_password=vagrant
+10.0.0.15 ansible_connection=ssh ansible_user=vagrant ansible_password=vagrant
+10.0.0.16 ansible_connection=ssh ansible_user=vagrant ansible_password=vagrant
