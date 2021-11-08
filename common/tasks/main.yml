@@ -1,2 +1,15 @@
 ---
 # tasks file for common
+
+- name: atualizacao do sistema operacional
+  yum: name=* state=latest update_cache=yes
+
+- name: instalacao de pacotes
+  yum:
+    name: "{{ packges }}"
+    state: latest
+  vars:
+    packges:
+      - net-tools
+      - vim
+      - nmap
