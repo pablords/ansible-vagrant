@@ -2,7 +2,21 @@
 - name: SISOP | Add Motd
   template: src=motd.sh dest=/etc/motd.sh force=yes owner=root group=root mode=0755
 
-- name: TIME | Configurando localtime
+- name: SISOP | Change /etc/profile
+  lineinfile: dest=/etc/profile line={{ item }}
+  with_items:
+    - '#--- Default export & Alias ---#'
+    - 'export HISTTIMEFORMAT="%d/%m/%Y - %H:%M:%S - "'
+    - 'export HISTSIZE="5000"'
+    - 'export HISTFILESIZE="5000"'
+    - 'export TERM=linux'
+    - 'alias ls="ls -lh --color"'
+    - 'alias grep="grep --color"'
+    - 'alias vi="vim"'
+    - 'alias rm="rm -i"'
+    - '/etc/motd.sh'
+
+- name: TIME | Config localtime
   file: src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime state=link force=yes
 
 - name: SSH | Add SSH Banner
