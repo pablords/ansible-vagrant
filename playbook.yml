@@ -1,6 +1,6 @@
 
 - name: Default Playbook - Starting Deploy
-  hosts: ubuntu
+  hosts: all
   roles: 
     - common
     - ubuntu
