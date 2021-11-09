@@ -1,7 +1,6 @@
 ---
 timezone: America/Sao_Paulo
-ozzy_pass_sha256: "$1$SomeSalt$Lr3HNooRw/PUoU3zA4Nt7."
-root_pass_sha256: "$1$SomeSalt$Lr3HNooRw/PUoU3zA4Nt7."
+
 
 common_packages_redhat:
   - "@Development tools"
