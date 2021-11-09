@@ -1,7 +1,7 @@
 [servers]
 ubuntu ansible_ssh_host=10.0.0.10 
-wordpress ansible_ssh_host=10.0.0.15 
-mysql ansible_ssh_host=10.0.0.16 
+centos ansible_ssh_host=10.0.0.15 
+debian ansible_ssh_host=10.0.0.16 
 
 
 [servers:vars]

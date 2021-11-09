@@ -1,6 +1,6 @@
 
 - name: Default Playbook - Starting Deploy
-  hosts: wordpress
+  hosts: all
   roles: 
     - common
 

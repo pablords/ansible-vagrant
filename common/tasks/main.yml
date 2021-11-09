@@ -1,20 +1,21 @@
 ---
-# tasks file for common
+- name: SISOP | Add Motd
+  template: src=motd.sh dest=/etc/motd.sh force=yes owner=root group=root mode=0755
 
-- name: atualizacao do sistema operacional
-  yum: name=* state=latest update_cache=yes
+- name: TIME | Configurando localtime
+  file: src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime state=link force=yes
 
-- name: instalacao de pacotes
-  yum:
-    name: "{{ packges }}"
-    state: latest
-  vars:
-    packges:
-      - httpd
-- name: ensure apache is running
-  service:
-    name: httpd
-    state: started
+- name: SSH | Add SSH Banner
+  copy: src=banner_ssh dest=/etc/ssh/banner_ssh 
 
-- name: Copiando Template
-  template: src=motd dest=/etc/motd force=yes owner=root group=root
+#  Update System Red Hat
+- name: Update System Red Hat
+  yum: name=* state=latest security=yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+#  Update System Debian
+- name: Update System Debian
+  apt: update_cache=yes upgrade=yes
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+

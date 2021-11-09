@@ -1,5 +1,5 @@
 ---------------------------------------------------------
-                    Servidor Web
+                  "{{ansible_distribution}}"
 
 Hostname.: "{{ansible_distribution}}"
 Endereco IP.: "{{ansible_default_ipv4.address}}"
