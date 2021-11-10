@@ -12,14 +12,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "centos" do |centos|
     centos.vm.box = "centos/7"
-    centos.vm.network "public_network", ip: "10.0.0.15", hostname: true
+    centos.vm.network "public_network", ip: "10.0.0.11", hostname: true
     centos.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
     centos.vm.provision :shell, :inline => "cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys", run: "always"
   end
 
   config.vm.define "debian" do |debian|
     debian.vm.box = "debian/jessie64"
-    debian.vm.network "public_network", ip: "10.0.0.16", hostname: true
+    debian.vm.network "public_network", ip: "10.0.0.12", hostname: true
     debian.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
     debian.vm.provision :shell, :inline => "cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys", run: "always"
   end
