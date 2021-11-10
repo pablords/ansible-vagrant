@@ -10,7 +10,6 @@ common_packages_redhat:
   - curl
   - elinks
   - git
-  - htop
   - iperf3
   - iptraf
   - lsof
@@ -18,7 +17,6 @@ common_packages_redhat:
   - mtr
   - net-tools
   - nmap
-  - pv
   - screen
   - tcpdump
   - telnet

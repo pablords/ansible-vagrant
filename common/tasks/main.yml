@@ -5,31 +5,47 @@
 - name: SISOP | Change /etc/profile
   lineinfile: dest=/etc/profile line={{ item }}
   with_items:
-    - '#--- Default export & Alias ---#'
+    - "#--- Default export & Alias ---#"
     - 'export HISTTIMEFORMAT="%d/%m/%Y - %H:%M:%S - "'
     - 'export HISTSIZE="5000"'
     - 'export HISTFILESIZE="5000"'
-    - 'export TERM=linux'
+    - "export TERM=linux"
     - 'alias ls="ls -lh --color"'
     - 'alias grep="grep --color"'
     - 'alias vi="vim"'
     - 'alias rm="rm -i"'
-    - '/etc/motd.sh'
+    - "/etc/motd.sh"
 
 - name: TIME | Config localtime
   file: src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime state=link force=yes
 
 - name: SSH | Add SSH Banner
-  copy: src=banner_ssh dest=/etc/ssh/banner_ssh 
+  copy: src=banner_ssh dest=/etc/ssh/banner_ssh
 
 #  Update System Red Hat
 - name: Update System Red Hat
   yum: name=* state=latest security=yes
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
 
+- name: YUM | Install common packages
+  yum: name={{ common_packages_redhat }} state=latest
+  when: ansible_distribution == "CentOS" or ansible_distribution == "RedHat"
+
+- name: YUM | Remove packages
+  yum:
+    name: ["firewalld", "postfix"]
+    state: absent
+  when: ansible_distribution == "CentOS" or ansible_distribution == "RedHat"
+
 #  Update System Debian
 - name: Update System Debian
   apt: update_cache=yes upgrade=yes
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
+- name: Debian Like | Update System
+  apt: name="*" state=latest
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
 
+- name: Debian Like | Install common packages
+  apt: name={{ common_packages_debian }} state=latest
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
