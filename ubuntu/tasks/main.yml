@@ -10,6 +10,7 @@
       - containerd
       - runc
     state: absent
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Update the apt package index and install packages to allow apt to use a repository over HTTPS
   apt:
@@ -19,16 +20,19 @@
       - gnupg
       - lsb-release
     state: latest
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Add Docker’s official GPG key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Add Docker Repository
   apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu bionic stable
     state: present
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Install Docker Engine
   apt:
@@ -39,3 +43,4 @@
       - docker-compose
     state: latest
     update_cache: yes
+  when: ansible_distribution == 'Ubuntu'
